@@ -1,7 +1,7 @@
 Web-server 
 -----
 
-A toy implementation of a python based webserver
+A list of full stack websites implemented in django backend and react frontend
 
 
 Libraries used
