@@ -1,12 +1,10 @@
-Django-React-Websites
+MusicRoom
 -----
 
-A list of full stack websites implemented in django backend and react frontend
-
-
-Libraries used
------
-
+MusicRoom is a fullstack website created for the purpose of allowing
+multiple people control a spotify playlist. It is implemented using a django
+rest framework api backend and React frontend integrated with spotify’s
+public Api.
 
 
 Usage
