@@ -6,7 +6,8 @@ module.exports = {
   entry: "./src/index.js",
   output: {
       path: path.resolve(__dirname, "./static/frontend"),
-      filename: "[name].js"
+      filename: "[name].js",
+      sourceMapFilename: "[name].js.map"
   },
   module: {
     rules: [
@@ -22,5 +23,6 @@ module.exports = {
   optimization: {
     minimize: true,
 
-  }
+  },
+  devtool: "eval-cheap-source-map"
 }
