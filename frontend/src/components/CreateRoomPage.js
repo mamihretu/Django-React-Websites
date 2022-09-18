@@ -17,13 +17,16 @@ const CreateRoomPage = () => {
 
       const updateVote = (e) => {
         setRoom(previousState => {
+          console.log("votes_to_skip:", e.target.value);
           return { ...previousState, votes_to_skip: e.target.value}
+          
         });
       } 
 
       const updatePausePrivilage = (e) => {
         setRoom(previousState => {
-          return { ...previousState, votes_to_skip: e.target.value === 'true' ? true : false}
+          console.log("guest_can_pause:", e.target.value);
+          return { ...previousState, guest_can_pause: e.target.value === 'true' ? true : false}
         });
       } 
 
