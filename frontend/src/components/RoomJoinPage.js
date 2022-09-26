@@ -6,18 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 
 const RoomJoinPage = () => {
   const [page, setPage] = useState({
-    roomCode :"",
+    roomID :"",
     error : false
   });
 
   const navigate = useNavigate();
 
 
-  function loadRoomCodeFromInput(e){
+  function loadRoomIDFromInput(e){
     setPage((previousState) => {
-          return {...previousState, roomCode: e.target.value}
+          return {...previousState, roomID: e.target.value}
     } );
-    console.log("Just got changed to:", page.roomCode);
+    console.log("Just got changed to:", page.roomID);
 
   }
 
@@ -49,13 +49,13 @@ const RoomJoinPage = () => {
         'X-CSRFToken': csrftoken
       },
       body: JSON.stringify({
-          code: page.roomCode
+          roomID: page.roomID
       })
     };    
     fetch('/api/join-room', requestOptions)
-    .then((response) => { 
+    .then((response) => {
       if(response.ok){
-          navigate(`/room/${page.roomCode}`);
+          navigate(`/room/${page.roomID}`);
       } else {
         (previousState) => {
           setPage({...previousState, error: true});
@@ -79,10 +79,10 @@ const RoomJoinPage = () => {
                 <TextField 
                   error={page.error}
                   label="Code"
-                  value={page.roomCode}
+                  value={page.roomID}
                   helperText={page.error}
                   variant="outlined"
-                  onChange = {loadRoomCodeFromInput}
+                  onChange = {loadRoomIDFromInput}
                   />
             </Grid> 
             <Grid item xs={12} align="center">

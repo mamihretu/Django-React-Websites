@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Grid, Button, Typography } from '@mui/material';
 import "../../static/css/index.css"; 
@@ -8,9 +8,27 @@ const Room = () => {
 	const navigate = useNavigate();
 	const [room, setRoom] = useState({
 		votes_to_skip: 2,
-		guest_can_pause: false,
-		is_host: false
+		guest_can_pause: false
 	});
+	const [visitor_is_host, setVisitor] = useState(false);
+
+
+
+	
+	useEffect(() => {
+		// console.log('is_host::::', is_host);
+		fetch('/api/get-room-details' + '?roomID=' + params.roomID)
+		.then((response) => response.json())
+		.then((data) => {
+			setRoom({votes_to_skip: data.votes_to_skip,
+					 guest_can_pause: data.guest_can_pause});
+			setVisitor(data.is_host);
+
+		});
+
+
+	}, [])
+
 
 	function leaveRoom() {
 		const requestOptions = {
@@ -21,23 +39,7 @@ const Room = () => {
 
 		fetch('/api/leave-room', requestOptions)
 		.then(response => navigate('/'));
-	}
-
-	
-	
-	useEffect(() => {
-		fetch('/api/get-room' + '?code=' + params.roomCode)
-		.then((response) => response.json())
-		.then((data) => {
-			setRoom({votes_to_skip: data.votes_to_skip,
-					 guest_can_pause: data.guest_can_pause,
-					 is_host: data.is_host})
-		})
-
-	}, [params])
-
-
-
+	}	
 
 	return(
 		<Grid container className= 'center' spacing={1}>
@@ -59,7 +61,7 @@ const Room = () => {
 			</Grid>	
 			<Grid item xs={12} align="center">
 				<Typography variant='h6' component='h6'>
-					Host: {room.is_host.toString()}
+					Host: {visitor_is_host.toString()}
 				</Typography>				
 			</Grid>
 			<Grid item xs={12} align="center">
