@@ -7,14 +7,3 @@ rest framework api backend and React frontend integrated with spotify’s
 public Api.
 
 
-Usage
------
-
-`````
-
-
-
-
-
-`````
-
